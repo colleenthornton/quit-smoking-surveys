@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quit Smoking Research — Share Your Experience</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #FAFAF8;
+      color: #1C1C1A;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72px 24px 100px;
+      flex: 1;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9B9890;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      line-height: 1.25;
+      margin-bottom: 22px;
+    }
+
+    .intro {
+      font-size: 16px;
+      color: #4A4844;
+      line-height: 1.8;
+      margin-bottom: 52px;
+      max-width: 580px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #E2E0DA;
+      margin-bottom: 52px;
+    }
+
+    .choose-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ABA89F;
+      margin-bottom: 16px;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      display: block;
+      padding: 26px 28px;
+      border: 1.5px solid #E2E0DA;
+      border-radius: 12px;
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: #1C1C1A;
+      box-shadow: 0 4px 16px rgba(28,28,26,0.07);
+      transform: translateY(-1px);
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ABA89F;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: #6B6963;
+      line-height: 1.65;
+    }
+
+    .card-arrow {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1C1C1A;
+      letter-spacing: 0.02em;
+    }
+
+    .card-arrow::after {
+      content: ' →';
+    }
+
+    .footer-note {
+      margin-top: 52px;
+      font-size: 13px;
+      color: #ABA89F;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 500px) {
+      .container { padding: 48px 16px 80px; }
+      h1 { font-size: 26px; }
+      .card { padding: 20px; }
+      .card-title { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="tag">Research Survey</div>
+
+  <h1>Help shape a program<br>that actually works.</h1>
+
+  <p class="intro">
+    I smoked for 20 years and tried to quit five times before it finally worked. Now I'm building a program for people who want to cross over — and I need your honest experience to make it real.<br><br>
+    This is a short survey. There are no right answers. Only your truth.
+  </p>
+
+  <div class="divider"></div>
+
+  <div class="choose-label">Which describes you?</div>
+
+  <div class="cards">
+
+    <a class="card" href="/current-smokers">
+      <div class="card-tag">Survey 1 of 2</div>
+      <div class="card-title">I currently smoke</div>
+      <div class="card-desc">Whether you're thinking about quitting or not even there yet — your experience right now is exactly what's needed. About 10 minutes.</div>
+      <div class="card-arrow">Take the survey</div>
+    </a>
+
+    <a class="card" href="/ex-smokers">
+      <div class="card-tag">Survey 2 of 2</div>
+      <div class="card-title">I've quit for good</div>
+      <div class="card-desc">You've been through it and come out the other side. What you know is the most valuable thing here. About 10 minutes.</div>
+      <div class="card-arrow">Take the survey</div>
+    </a>
+
+  </div>
+
+  <p class="footer-note">All responses are anonymous. No account needed. No spam — ever.</p>
+
+</div>
+
+</body>
+</html>
