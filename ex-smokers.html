@@ -245,7 +245,7 @@
     .share-prompt {
       font-size: 14px;
       color: #9B9890;
-      margin-bottom: 14px;
+      margin-bottom: 22px;
       max-width: none !important;
     }
     .share-btn {
@@ -629,6 +629,30 @@
             window.scrollTo({ top, behavior: 'smooth' });
           }, 350);
         }
+      }
+    }
+
+    // Auto-advance on checkbox — debounced so multi-select has time to finish
+    if (e.target.type === 'checkbox') {
+      const currentBlock = e.target.closest('.question[id]');
+      if (currentBlock) {
+        clearTimeout(currentBlock._cbTimer);
+        currentBlock._cbTimer = setTimeout(() => {
+          const allBlocks = Array.from(document.querySelectorAll('.question[id]')).filter(b => {
+            let el = b.parentElement;
+            while (el && el !== form) {
+              if (el.classList.contains('conditional-block') && !el.classList.contains('visible')) return false;
+              el = el.parentElement;
+            }
+            return true;
+          });
+          const idx = allBlocks.indexOf(currentBlock);
+          const nextBlock = allBlocks[idx + 1];
+          if (nextBlock) {
+            const top = nextBlock.getBoundingClientRect().top + window.pageYOffset - 24;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }, 900);
       }
     }
   });
