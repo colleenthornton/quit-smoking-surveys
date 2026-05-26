@@ -271,6 +271,37 @@
       max-width: 420px;
       margin: 0 auto;
     }
+    .share-section {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid #E2E0DA;
+    }
+    .share-prompt {
+      font-size: 14px;
+      color: #9B9890;
+      margin-bottom: 14px;
+      max-width: none !important;
+    }
+    .share-btn {
+      background: transparent;
+      color: #1C1C1A;
+      border: 1.5px solid #1C1C1A;
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: -0.1px;
+    }
+    .share-btn:hover { background: #1C1C1A; color: #fff; }
+    .share-confirm {
+      display: none;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #6B6963;
+    }
 
     @media (max-width: 500px) {
       .container { padding: 40px 16px 80px; }
@@ -290,6 +321,11 @@
   <div class="success-state" id="success">
     <h2>Thank you — genuinely.</h2>
     <p>Every answer you gave matters. This research is shaping something real, and your honesty is exactly what it needs.<br><br>I hope what gets built finds you at the right moment.</p>
+    <div class="share-section">
+      <p class="share-prompt">Know someone else who should take this?</p>
+      <button class="share-btn" id="share-btn">Share the survey</button>
+      <p class="share-confirm" id="share-confirm">Link copied to clipboard ✓</p>
+    </div>
   </div>
 
   <form id="survey-form" novalidate>
@@ -297,7 +333,7 @@
     <header class="survey-header">
       <div class="survey-tag">Survey &mdash; Current Smokers</div>
       <h1>Quit Smoking: Current Smokers</h1>
-      <p class="survey-desc">This survey is part of research for a quit smoking program built by someone who's been exactly where you are. All responses are anonymous. There are no right or wrong answers &mdash; only your honest experience.</p>
+      <p class="survey-desc">This survey is part of research for a quit smoking program built by someone who's been exactly where you are. There are no right or wrong answers &mdash; only your honest experience. Your email is optional; if you share it, it's only used to keep you in the loop.</p>
     </header>
 
     <!-- Q1 -->
@@ -628,6 +664,27 @@
       if (block) block.classList.remove('missing');
     }
     validationMsg.style.display = 'none';
+  });
+
+  // Share button
+  document.getElementById('share-btn').addEventListener('click', async () => {
+    const url = 'https://quit-smoking-surveys.vercel.app';
+    const confirm = document.getElementById('share-confirm');
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Quit Smoking Research Survey', url });
+        return;
+      } catch {}
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    }
+    confirm.style.display = 'block';
+    setTimeout(() => confirm.style.display = 'none', 3000);
   });
 
   form.addEventListener('submit', async function (e) {
