@@ -62,7 +62,7 @@
     }
 
     .question {
-      margin-bottom: 48px;
+      margin-bottom: 60px;
       scroll-margin-top: 40px;
     }
     .question-meta {
@@ -185,13 +185,45 @@
     .question.missing textarea { border-color: #FCA5A5; }
     .question.missing .scale-btn { border-color: #FCA5A5; }
 
-    .divider {
-      height: 1px;
-      background: #E2E0DA;
-      margin: 52px 0;
+    .email-invite {
+      margin: 52px 0 0;
+      padding: 24px 26px;
+      background: #F5F4F0;
+      border-radius: 12px;
+      border: 1.5px solid #E2E0DA;
     }
+    .email-invite-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1C1C1A;
+      margin-bottom: 18px;
+    }
+    .email-invite-text strong { font-weight: 700; }
+    .email-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #9B9890;
+      margin-bottom: 8px;
+    }
+    .email-field input[type="email"] {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #E2E0DA;
+      border-radius: 9px;
+      font-size: 15px;
+      font-family: inherit;
+      color: #1C1C1A;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.12s;
+    }
+    .email-field input[type="email"]:focus { border-color: #1C1C1A; }
+    .email-field input[type="email"]::placeholder { color: #C5C2BB; }
 
-    .submit-section { margin-top: 52px; }
+    .submit-section { margin-top: 32px; }
     .submit-btn {
       background: #1C1C1A;
       color: #fff;
@@ -256,8 +288,8 @@
 <div class="container">
 
   <div class="success-state" id="success">
-    <h2>Thank you.</h2>
-    <p>Your response has been recorded. It means more than you know.</p>
+    <h2>Thank you — genuinely.</h2>
+    <p>Every answer you gave matters. This research is shaping something real, and your honesty is exactly what it needs.<br><br>I hope what gets built finds you at the right moment.</p>
   </div>
 
   <form id="survey-form" novalidate>
@@ -280,7 +312,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q2 -->
     <div class="question" id="q2-block">
@@ -295,7 +326,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q3 -->
     <div class="question" id="q3-block">
@@ -310,7 +340,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q4 -->
     <div class="question" id="q4-block">
@@ -319,7 +348,6 @@
       <textarea name="q4" rows="6" placeholder="Describe it as honestly as you can…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q5 -->
     <div class="question" id="q5-block">
@@ -342,7 +370,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q6 -->
     <div class="question" id="q6-block">
@@ -359,7 +386,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q7 -->
     <div class="question" id="q7-block">
@@ -373,7 +399,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q8 -->
     <div class="question" id="q8-block">
@@ -393,7 +418,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q9 -->
     <div class="question" id="q9-block">
@@ -402,7 +426,6 @@
       <textarea name="q9" rows="5" placeholder="Be as honest as you can…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q10 -->
     <div class="question" id="q10-block">
@@ -411,7 +434,6 @@
       <textarea name="q10" rows="5" placeholder="What would actually help…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q11 -->
     <div class="question" id="q11-block">
@@ -429,7 +451,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q12 -->
     <div class="question" id="q12-block">
@@ -446,7 +467,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q13 -->
     <div class="question" id="q13-block">
@@ -462,7 +482,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q14 -->
     <div class="question" id="q14-block">
@@ -477,7 +496,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q15 -->
     <div class="question" id="q15-block">
@@ -491,13 +509,22 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q16 -->
     <div class="question" id="q16-block">
       <div class="question-meta">Question 16 of 16</div>
       <div class="question-text">Is there anything else you'd like to share? <span class="optional-note">Optional</span></div>
       <textarea name="q16" rows="5" placeholder="Anything at all…"></textarea>
+    </div>
+
+    <div class="email-invite">
+      <div class="email-invite-text">
+        <strong>One more thing —</strong> if you're open to finally quitting, I'm building a program and would love to keep you in the loop. You might even be invited to join the beta.
+      </div>
+      <div class="email-field">
+        <label for="email-input">Your email address &nbsp;<span class="optional-note">Optional</span></label>
+        <input type="email" name="email" id="email-input" placeholder="you@example.com" autocomplete="email">
+      </div>
     </div>
 
     <div class="submit-section">
@@ -572,7 +599,7 @@
     return firstMissing;
   }
 
-  // Clear missing state on interaction
+  // Auto-scroll to next question + clear missing state
   form.addEventListener('change', e => {
     const name = e.target.name;
     if (name) {
@@ -580,6 +607,19 @@
       if (block) block.classList.remove('missing');
     }
     validationMsg.style.display = 'none';
+
+    // Auto-advance on radio selection (single-choice questions and scales)
+    if (e.target.type === 'radio') {
+      const currentBlock = e.target.closest('.question[id]');
+      if (currentBlock) {
+        const allBlocks = Array.from(document.querySelectorAll('.question[id]'));
+        const idx = allBlocks.indexOf(currentBlock);
+        const nextBlock = allBlocks[idx + 1];
+        if (nextBlock) {
+          setTimeout(() => nextBlock.scrollIntoView({ behavior: 'smooth', block: 'start' }), 380);
+        }
+      }
+    }
   });
   form.addEventListener('input', e => {
     const name = e.target.name;

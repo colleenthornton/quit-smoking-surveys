@@ -62,7 +62,7 @@
     }
 
     .question {
-      margin-bottom: 48px;
+      margin-bottom: 60px;
       scroll-margin-top: 40px;
     }
     .question-meta {
@@ -151,13 +151,45 @@
     }
     .conditional-block.visible { display: block; }
 
-    .divider {
-      height: 1px;
-      background: #E2E0DA;
-      margin: 52px 0;
+    .email-invite {
+      margin: 52px 0 0;
+      padding: 24px 26px;
+      background: #F5F4F0;
+      border-radius: 12px;
+      border: 1.5px solid #E2E0DA;
     }
+    .email-invite-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1C1C1A;
+      margin-bottom: 18px;
+    }
+    .email-invite-text strong { font-weight: 700; }
+    .email-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #9B9890;
+      margin-bottom: 8px;
+    }
+    .email-field input[type="email"] {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #E2E0DA;
+      border-radius: 9px;
+      font-size: 15px;
+      font-family: inherit;
+      color: #1C1C1A;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.12s;
+    }
+    .email-field input[type="email"]:focus { border-color: #1C1C1A; }
+    .email-field input[type="email"]::placeholder { color: #C5C2BB; }
 
-    .submit-section { margin-top: 52px; }
+    .submit-section { margin-top: 32px; }
     .submit-btn {
       background: #1C1C1A;
       color: #fff;
@@ -220,8 +252,8 @@
 <div class="container">
 
   <div class="success-state" id="success">
-    <h2>Thank you.</h2>
-    <p>Your honesty matters. What you've shared will help others find their way through.</p>
+    <h2>Thank you — deeply.</h2>
+    <p>What you've shared carries real weight. Your experience on the other side of this is exactly what someone still in the thick of it needs to hear.<br><br>This will help more people than you know.</p>
   </div>
 
   <form id="survey-form" novalidate>
@@ -245,7 +277,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q2 -->
     <div class="question" id="q2-block">
@@ -260,7 +291,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q3 -->
     <div class="question" id="q3-block">
@@ -275,7 +305,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q4 + conditional Q5 -->
     <div class="question" id="q4-block">
@@ -296,7 +325,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q6 -->
     <div class="question" id="q6-block">
@@ -305,7 +333,6 @@
       <textarea name="q6" rows="6" placeholder="What did it actually feel like physically…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q7 -->
     <div class="question" id="q7-block">
@@ -314,7 +341,6 @@
       <textarea name="q7" rows="6" placeholder="Practically, moment to moment…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q8 -->
     <div class="question" id="q8-block">
@@ -323,7 +349,6 @@
       <textarea name="q8" rows="6" placeholder="Be as honest as you can…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q9 -->
     <div class="question" id="q9-block">
@@ -337,7 +362,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q10 -->
     <div class="question" id="q10-block">
@@ -357,7 +381,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q11 -->
     <div class="question" id="q11-block">
@@ -366,7 +389,6 @@
       <textarea name="q11" rows="6" placeholder="If you had to name one thing…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q12 -->
     <div class="question" id="q12-block">
@@ -380,7 +402,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q13 -->
     <div class="question" id="q13-block">
@@ -389,7 +410,6 @@
       <textarea name="q13" rows="6" placeholder="What was missing that would have made a real difference…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q14 -->
     <div class="question" id="q14-block">
@@ -398,7 +418,6 @@
       <textarea name="q14" rows="6" placeholder="Speak directly to them…"></textarea>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q15 -->
     <div class="question" id="q15-block">
@@ -411,7 +430,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q16 -->
     <div class="question" id="q16-block">
@@ -425,13 +443,22 @@
       </div>
     </div>
 
-    <div class="divider"></div>
 
     <!-- Q17 -->
     <div class="question" id="q17-block">
       <div class="question-meta">Question 17 of 17</div>
       <div class="question-text">Anything else you'd like to add? <span class="optional-note">Optional</span></div>
       <textarea name="q17" rows="5" placeholder="Anything at all…"></textarea>
+    </div>
+
+    <div class="email-invite">
+      <div class="email-invite-text">
+        <strong>Your responses directly shape what gets built.</strong> If you'd like to hear when the program launches — or be part of it — leave your email below. No spam, ever.
+      </div>
+      <div class="email-field">
+        <label for="email-input">Your email address &nbsp;<span class="optional-note">Optional</span></label>
+        <input type="email" name="email" id="email-input" placeholder="you@example.com" autocomplete="email">
+      </div>
     </div>
 
     <div class="submit-section">
@@ -536,7 +563,7 @@
     return firstMissing;
   }
 
-  // Clear missing state on interaction
+  // Auto-scroll to next question + clear missing state
   form.addEventListener('change', e => {
     const name = e.target.name;
     if (name) {
@@ -544,6 +571,27 @@
       if (block) block.classList.remove('missing');
     }
     validationMsg.style.display = 'none';
+
+    // Auto-advance on radio selection
+    if (e.target.type === 'radio') {
+      const currentBlock = e.target.closest('.question[id]');
+      if (currentBlock) {
+        // Build ordered list of visible question blocks
+        const allBlocks = Array.from(document.querySelectorAll('.question[id]')).filter(b => {
+          let el = b.parentElement;
+          while (el && el !== form) {
+            if (el.classList.contains('conditional-block') && !el.classList.contains('visible')) return false;
+            el = el.parentElement;
+          }
+          return true;
+        });
+        const idx = allBlocks.indexOf(currentBlock);
+        const nextBlock = allBlocks[idx + 1];
+        if (nextBlock) {
+          setTimeout(() => nextBlock.scrollIntoView({ behavior: 'smooth', block: 'start' }), 380);
+        }
+      }
+    }
   });
   form.addEventListener('input', e => {
     const name = e.target.name;

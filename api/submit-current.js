@@ -26,6 +26,7 @@ module.exports = async function handler(req, res) {
     'Willingness to Pay': d.q14 || '',
     'Trust in Creator': d.q15 || '',
     'Additional Comments': d.q16 || '',
+    'Email': d.email || '',
   };
 
   // Remove empty/undefined values so Airtable doesn't error

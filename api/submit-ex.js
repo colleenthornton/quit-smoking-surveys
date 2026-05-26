@@ -27,6 +27,7 @@ module.exports = async function handler(req, res) {
     'Emptiness Statement': d.q15 || '',
     'Willingness to Share': d.q16 || '',
     'Additional Comments': d.q17 || '',
+    'Email': d.email || '',
   };
 
   for (const key of Object.keys(fields)) {
