@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/current-smokers", "destination": "/current-smokers.html" },
+    { "source": "/ex-smokers", "destination": "/ex-smokers.html" }
+  ]
+}

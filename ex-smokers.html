@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quit Smoking: Ex-Smokers Survey</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #FAFAF8;
+      color: #1C1C1A;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .progress-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 3px;
+      background: #E2E0DA;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #1C1C1A;
+      width: 0%;
+      transition: width 0.2s ease;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 24px 100px;
+    }
+
+    .survey-header {
+      margin-bottom: 52px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #E2E0DA;
+    }
+    .survey-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9B9890;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+    .survey-desc {
+      font-size: 15px;
+      color: #6B6963;
+      line-height: 1.75;
+    }
+
+    .question {
+      margin-bottom: 48px;
+      scroll-margin-top: 40px;
+    }
+    .question-meta {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ABA89F;
+      margin-bottom: 8px;
+    }
+    .question-text {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.45;
+      margin-bottom: 18px;
+      transition: color 0.2s;
+    }
+    .optional-note {
+      font-size: 13px;
+      font-weight: 400;
+      color: #ABA89F;
+      margin-left: 6px;
+    }
+
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 16px;
+      border: 1.5px solid #E2E0DA;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: border-color 0.12s;
+      font-size: 15px;
+      line-height: 1.45;
+      user-select: none;
+      background: #fff;
+    }
+    .option-label:hover { border-color: #B0ADA5; }
+    .option-label input[type="radio"],
+    .option-label input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      margin-top: 2px;
+      accent-color: #1C1C1A;
+      cursor: pointer;
+    }
+    .option-label:has(input:checked) {
+      border-color: #1C1C1A;
+      background: #F5F4F0;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #E2E0DA;
+      border-radius: 9px;
+      font-size: 15px;
+      font-family: inherit;
+      line-height: 1.65;
+      color: #1C1C1A;
+      background: #fff;
+      resize: vertical;
+      min-height: 120px;
+      transition: border-color 0.12s;
+      outline: none;
+    }
+    textarea:focus { border-color: #1C1C1A; }
+    textarea::placeholder { color: #C5C2BB; }
+
+    .question.missing .question-text { color: #B91C1C; }
+    .question.missing .option-label { border-color: #FCA5A5; }
+    .question.missing textarea { border-color: #FCA5A5; }
+
+    .conditional-block {
+      display: none;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px dashed #E2E0DA;
+    }
+    .conditional-block.visible { display: block; }
+
+    .divider {
+      height: 1px;
+      background: #E2E0DA;
+      margin: 52px 0;
+    }
+
+    .submit-section { margin-top: 52px; }
+    .submit-btn {
+      background: #1C1C1A;
+      color: #fff;
+      border: none;
+      padding: 16px 44px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      letter-spacing: -0.1px;
+    }
+    .submit-btn:hover { opacity: 0.82; }
+    .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .error-msg {
+      display: none;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #B91C1C;
+    }
+    .validation-msg {
+      display: none;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #B91C1C;
+    }
+
+    .success-state {
+      display: none;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .success-state h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .success-state p {
+      font-size: 16px;
+      color: #6B6963;
+      line-height: 1.75;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 500px) {
+      .container { padding: 40px 16px 80px; }
+      h1 { font-size: 22px; }
+      .question-text { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<div class="container">
+
+  <div class="success-state" id="success">
+    <h2>Thank you.</h2>
+    <p>Your honesty matters. What you've shared will help others find their way through.</p>
+  </div>
+
+  <form id="survey-form" novalidate>
+
+    <header class="survey-header">
+      <div class="survey-tag">Survey &mdash; Ex-Smokers</div>
+      <h1>Quit Smoking: Ex-Smokers</h1>
+      <p class="survey-desc">You've been through it and come out the other side. This survey is for a quit smoking program built by someone who's walked the same road. Your experience is the most valuable thing here. All responses are anonymous.</p>
+    </header>
+
+    <!-- Q1 -->
+    <div class="question" id="q1-block">
+      <div class="question-meta">Question 1 of 17</div>
+      <div class="question-text">How long ago did you quit for good?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q1" value="Less than 6 months ago"><span>Less than 6 months ago</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="6 months to 1 year ago"><span>6 months to 1 year ago</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="1–3 years ago"><span>1–3 years ago</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="3–10 years ago"><span>3–10 years ago</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="More than 10 years ago"><span>More than 10 years ago</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q2 -->
+    <div class="question" id="q2-block">
+      <div class="question-meta">Question 2 of 17</div>
+      <div class="question-text">How many times had you tried to quit before it finally worked?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q2" value="This was my first real attempt"><span>This was my first real attempt</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="Once before"><span>Once before</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="2–3 times"><span>2–3 times</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="4–5 times"><span>4–5 times</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="More than 5 times"><span>More than 5 times</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q3 -->
+    <div class="question" id="q3-block">
+      <div class="question-meta">Question 3 of 17</div>
+      <div class="question-text">How long had you been smoking before you quit?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q3" value="Less than 1 year"><span>Less than 1 year</span></label>
+        <label class="option-label"><input type="radio" name="q3" value="1–5 years"><span>1–5 years</span></label>
+        <label class="option-label"><input type="radio" name="q3" value="6–10 years"><span>6–10 years</span></label>
+        <label class="option-label"><input type="radio" name="q3" value="11–20 years"><span>11–20 years</span></label>
+        <label class="option-label"><input type="radio" name="q3" value="More than 20 years"><span>More than 20 years</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q4 + conditional Q5 -->
+    <div class="question" id="q4-block">
+      <div class="question-meta">Question 4 of 17</div>
+      <div class="question-text">Was there a specific moment or shift that made this attempt different from the others?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q4" value="Yes" id="q4-yes"><span>Yes</span></label>
+        <label class="option-label"><input type="radio" name="q4" value="Not really — it felt more gradual"><span>Not really &mdash; it felt more gradual</span></label>
+        <label class="option-label"><input type="radio" name="q4" value="I'm not sure"><span>I'm not sure</span></label>
+      </div>
+
+      <div class="conditional-block" id="q5-conditional">
+        <div class="question" id="q5-block" style="margin-bottom: 0;">
+          <div class="question-meta">Question 5 of 17</div>
+          <div class="question-text">If yes — what was that moment or shift? Describe it as honestly as you can.</div>
+          <textarea name="q5" id="q5-textarea" rows="6" placeholder="What changed, and why was this time different…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q6 -->
+    <div class="question" id="q6-block">
+      <div class="question-meta">Question 6 of 17</div>
+      <div class="question-text">How would you describe the physical feeling of withdrawal — in your body, not just your mind?</div>
+      <textarea name="q6" rows="6" placeholder="What did it actually feel like physically…"></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q7 -->
+    <div class="question" id="q7-block">
+      <div class="question-meta">Question 7 of 17</div>
+      <div class="question-text">What did you do with that discomfort? How did you actually get through it?</div>
+      <textarea name="q7" rows="6" placeholder="Practically, moment to moment…"></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q8 -->
+    <div class="question" id="q8-block">
+      <div class="question-meta">Question 8 of 17</div>
+      <div class="question-text">What do you think was the real reason you smoked — beneath the habit itself?</div>
+      <textarea name="q8" rows="6" placeholder="Be as honest as you can…"></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q9 -->
+    <div class="question" id="q9-block">
+      <div class="question-meta">Question 9 of 17</div>
+      <div class="question-text">When you quit, did you feel a sense of emptiness, loss, or restlessness — even as you knew it was the right thing?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q9" value="Yes, strongly"><span>Yes, strongly</span></label>
+        <label class="option-label"><input type="radio" name="q9" value="Somewhat"><span>Somewhat</span></label>
+        <label class="option-label"><input type="radio" name="q9" value="Not really"><span>Not really</span></label>
+        <label class="option-label"><input type="radio" name="q9" value="No"><span>No</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q10 -->
+    <div class="question" id="q10-block">
+      <div class="question-meta">Question 10 of 17 &mdash; Select all that apply</div>
+      <div class="question-text">What methods or tools did you use when you quit?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="checkbox" name="q10" value="Cold turkey"><span>Cold turkey</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Nicotine patches or gum"><span>Nicotine patches or gum</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Prescription medication"><span>Prescription medication</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Vaping / e-cigarettes"><span>Vaping / e-cigarettes</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Mindfulness or meditation"><span>Mindfulness or meditation</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Exercise or movement"><span>Exercise or movement</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Community or accountability"><span>Community or accountability</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Therapy or counselling"><span>Therapy or counselling</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Breathwork or body-based practice"><span>Breathwork or body-based practice</span></label>
+        <label class="option-label"><input type="checkbox" name="q10" value="Other"><span>Other</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q11 -->
+    <div class="question" id="q11-block">
+      <div class="question-meta">Question 11 of 17</div>
+      <div class="question-text">What was the single most important thing that helped you finally cross over?</div>
+      <textarea name="q11" rows="6" placeholder="If you had to name one thing…"></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q12 -->
+    <div class="question" id="q12-block">
+      <div class="question-meta">Question 12 of 17</div>
+      <div class="question-text">Did community — even one other person — play a meaningful role in your quit?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q12" value="Yes, it was essential"><span>Yes, it was essential</span></label>
+        <label class="option-label"><input type="radio" name="q12" value="It helped"><span>It helped</span></label>
+        <label class="option-label"><input type="radio" name="q12" value="Not really"><span>Not really</span></label>
+        <label class="option-label"><input type="radio" name="q12" value="I did it completely alone"><span>I did it completely alone</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q13 -->
+    <div class="question" id="q13-block">
+      <div class="question-meta">Question 13 of 17</div>
+      <div class="question-text">What do you wish had existed when you were going through it — that didn't?</div>
+      <textarea name="q13" rows="6" placeholder="What was missing that would have made a real difference…"></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q14 -->
+    <div class="question" id="q14-block">
+      <div class="question-meta">Question 14 of 17</div>
+      <div class="question-text">What would you say to someone at the hardest moment — the point where they most want to give in?</div>
+      <textarea name="q14" rows="6" placeholder="Speak directly to them…"></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q15 -->
+    <div class="question" id="q15-block">
+      <div class="question-meta">Question 15 of 17</div>
+      <div class="question-text">Does this resonate: &ldquo;The hardest part wasn't the craving — it was sitting with the emptiness the cigarette used to fill.&rdquo;</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q15" value="Yes, exactly"><span>Yes, exactly</span></label>
+        <label class="option-label"><input type="radio" name="q15" value="Somewhat"><span>Somewhat</span></label>
+        <label class="option-label"><input type="radio" name="q15" value="Not for me"><span>Not for me</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q16 -->
+    <div class="question" id="q16-block">
+      <div class="question-meta">Question 16 of 17</div>
+      <div class="question-text">Would you be willing to share your story to help others going through it?</div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="q16" value="Yes — happy to be named"><span>Yes &mdash; happy to be named</span></label>
+        <label class="option-label"><input type="radio" name="q16" value="Yes — but anonymously"><span>Yes &mdash; but anonymously</span></label>
+        <label class="option-label"><input type="radio" name="q16" value="Maybe — tell me more"><span>Maybe &mdash; tell me more</span></label>
+        <label class="option-label"><input type="radio" name="q16" value="No"><span>No</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Q17 -->
+    <div class="question" id="q17-block">
+      <div class="question-meta">Question 17 of 17</div>
+      <div class="question-text">Anything else you'd like to add? <span class="optional-note">Optional</span></div>
+      <textarea name="q17" rows="5" placeholder="Anything at all…"></textarea>
+    </div>
+
+    <div class="submit-section">
+      <button type="submit" class="submit-btn" id="submit-btn">Submit</button>
+      <p class="validation-msg" id="validation-msg">Please answer all required questions before submitting.</p>
+      <p class="error-msg" id="error-msg">Something went wrong. Please try again.</p>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('survey-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const errorMsg = document.getElementById('error-msg');
+  const validationMsg = document.getElementById('validation-msg');
+  const success = document.getElementById('success');
+  const progressFill = document.getElementById('progress');
+
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressFill.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+  });
+
+  // Conditional Q5: show when Q4 = "Yes"
+  const q4Inputs = form.querySelectorAll('input[name="q4"]');
+  const q5Conditional = document.getElementById('q5-conditional');
+  const q5Textarea = document.getElementById('q5-textarea');
+
+  q4Inputs.forEach(input => {
+    input.addEventListener('change', () => {
+      const showQ5 = input.value === 'Yes';
+      q5Conditional.classList.toggle('visible', showQ5);
+      q5Textarea.required = showQ5;
+      // Clear missing state on Q4 block
+      document.getElementById('q4-block').classList.remove('missing');
+      if (!showQ5) {
+        document.getElementById('q5-block').classList.remove('missing');
+        q5Textarea.value = '';
+      }
+    });
+  });
+
+  // Required question IDs
+  const requiredRadioGroups = ['q1', 'q2', 'q3', 'q4', 'q9', 'q12', 'q15', 'q16'];
+  const requiredTextareas = ['q6', 'q7', 'q8', 'q11', 'q13', 'q14'];
+
+  function collectData() {
+    const raw = {};
+    for (const [key, val] of new FormData(form).entries()) {
+      if (raw[key] !== undefined) {
+        raw[key] = Array.isArray(raw[key]) ? [...raw[key], val] : [raw[key], val];
+      } else {
+        raw[key] = val;
+      }
+    }
+    const data = {};
+    for (const [key, val] of Object.entries(raw)) {
+      data[key] = Array.isArray(val) ? val.join(', ') : val;
+    }
+    return data;
+  }
+
+  function validate() {
+    let firstMissing = null;
+
+    requiredRadioGroups.forEach(name => {
+      const block = document.getElementById(name + '-block');
+      if (!block) return;
+      const checked = form.querySelector(`input[name="${name}"]:checked`);
+      if (!checked) {
+        block.classList.add('missing');
+        if (!firstMissing) firstMissing = block;
+      } else {
+        block.classList.remove('missing');
+      }
+    });
+
+    requiredTextareas.forEach(name => {
+      const block = document.getElementById(name + '-block');
+      if (!block) return;
+      const ta = form.querySelector(`textarea[name="${name}"]`);
+      if (!ta.value.trim()) {
+        block.classList.add('missing');
+        if (!firstMissing) firstMissing = block;
+      } else {
+        block.classList.remove('missing');
+      }
+    });
+
+    // Conditional Q5
+    const q5Block = document.getElementById('q5-block');
+    if (q5Conditional.classList.contains('visible') && !q5Textarea.value.trim()) {
+      q5Block.classList.add('missing');
+      if (!firstMissing) firstMissing = q5Block;
+    } else {
+      q5Block.classList.remove('missing');
+    }
+
+    return firstMissing;
+  }
+
+  // Clear missing state on interaction
+  form.addEventListener('change', e => {
+    const name = e.target.name;
+    if (name) {
+      const block = document.getElementById(name + '-block');
+      if (block) block.classList.remove('missing');
+    }
+    validationMsg.style.display = 'none';
+  });
+  form.addEventListener('input', e => {
+    const name = e.target.name;
+    if (name) {
+      const block = document.getElementById(name + '-block');
+      if (block) block.classList.remove('missing');
+    }
+    validationMsg.style.display = 'none';
+  });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errorMsg.style.display = 'none';
+    validationMsg.style.display = 'none';
+
+    const firstMissing = validate();
+    if (firstMissing) {
+      validationMsg.style.display = 'block';
+      firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    submitBtn.textContent = 'Submitting…';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/submit-ex', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(collectData()),
+      });
+
+      if (!res.ok) throw new Error('failed');
+
+      form.style.display = 'none';
+      success.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {
+      submitBtn.textContent = 'Submit';
+      submitBtn.disabled = false;
+      errorMsg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>
