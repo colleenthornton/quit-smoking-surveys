@@ -249,19 +249,19 @@
       max-width: none !important;
     }
     .share-btn {
-      background: transparent;
-      color: #1C1C1A;
-      border: 1.5px solid #1C1C1A;
+      background: #3B7A57;
+      color: #fff;
+      border: 1.5px solid #3B7A57;
       padding: 12px 28px;
       font-size: 14px;
       font-weight: 600;
       font-family: inherit;
       border-radius: 9px;
       cursor: pointer;
-      transition: background 0.15s, color 0.15s;
+      transition: background 0.15s, border-color 0.15s;
       letter-spacing: -0.1px;
     }
-    .share-btn:hover { background: #1C1C1A; color: #fff; }
+    .share-btn:hover { background: #2F6144; border-color: #2F6144; }
     .share-confirm {
       display: none;
       margin-top: 12px;
@@ -624,7 +624,10 @@
         const idx = allBlocks.indexOf(currentBlock);
         const nextBlock = allBlocks[idx + 1];
         if (nextBlock) {
-          setTimeout(() => nextBlock.scrollIntoView({ behavior: 'smooth', block: 'start' }), 380);
+          setTimeout(() => {
+            const top = nextBlock.getBoundingClientRect().top + window.pageYOffset - 24;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }, 350);
         }
       }
     }
