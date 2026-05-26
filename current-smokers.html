@@ -283,12 +283,6 @@
       margin-bottom: 32px;
       max-width: none !important;
     }
-    .share-buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
     .share-btn {
       background: #3B7A57;
       color: #fff;
@@ -303,20 +297,6 @@
       letter-spacing: -0.1px;
     }
     .share-btn:hover { background: #2F6144; border-color: #2F6144; }
-    .copy-btn {
-      background: transparent;
-      color: #3B7A57;
-      border: 1.5px solid #3B7A57;
-      padding: 12px 28px;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: inherit;
-      border-radius: 9px;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-      letter-spacing: -0.1px;
-    }
-    .copy-btn:hover { background: #f0f7f3; }
     .share-confirm {
       display: none;
       margin-top: 12px;
@@ -344,10 +324,7 @@
     <p>Every answer you gave matters. This research is shaping something real, and your honesty is exactly what it needs.<br><br>I hope what gets built finds you at the right moment.</p>
     <div class="share-section">
       <p class="share-prompt">Know someone else who should take this?</p>
-      <div class="share-buttons">
-        <button class="share-btn" id="share-btn">Share the survey</button>
-        <button class="copy-btn" id="copy-btn">Copy link</button>
-      </div>
+      <button class="share-btn" id="share-btn">Share the survey</button>
       <p class="share-confirm" id="share-confirm">Link copied to clipboard ✓</p>
     </div>
   </div>
@@ -711,9 +688,12 @@
   });
 
   // Share button
-  async function copyLink() {
+  document.getElementById('share-btn').addEventListener('click', async () => {
     const url = 'https://smokesignal.vercel.app';
     const confirm = document.getElementById('share-confirm');
+    if (navigator.share) {
+      try { await navigator.share({ title: 'Quit Smoking Research Survey', url }); return; } catch {}
+    }
     try {
       await navigator.clipboard.writeText(url);
     } catch {
@@ -723,20 +703,7 @@
     }
     confirm.style.display = 'block';
     setTimeout(() => confirm.style.display = 'none', 3000);
-  }
-
-  document.getElementById('share-btn').addEventListener('click', async () => {
-    const url = 'https://smokesignal.vercel.app';
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'Quit Smoking Research Survey', url });
-        return;
-      } catch {}
-    }
-    copyLink();
   });
-
-  document.getElementById('copy-btn').addEventListener('click', copyLink);
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
