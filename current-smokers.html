@@ -660,22 +660,6 @@
       }
     }
 
-    // Auto-advance on checkbox — debounced so multi-select has time to finish
-    if (e.target.type === 'checkbox') {
-      const currentBlock = e.target.closest('.question[id]');
-      if (currentBlock) {
-        clearTimeout(currentBlock._cbTimer);
-        currentBlock._cbTimer = setTimeout(() => {
-          const allBlocks = Array.from(document.querySelectorAll('.question[id]'));
-          const idx = allBlocks.indexOf(currentBlock);
-          const nextBlock = allBlocks[idx + 1];
-          if (nextBlock) {
-            const top = nextBlock.getBoundingClientRect().top + window.pageYOffset - 24;
-            window.scrollTo({ top, behavior: 'smooth' });
-          }
-        }, 900);
-      }
-    }
   });
   form.addEventListener('input', e => {
     const name = e.target.name;
