@@ -231,6 +231,15 @@
     }
     .email-field input[type="email"]:focus { border-color: #1C1C1A; }
     .email-field input[type="email"]::placeholder { color: #C5C2BB; }
+    .options-divider {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ABA89F;
+      padding: 4px 0 2px;
+      margin-top: 6px;
+    }
     .opt-in-field { margin-top: 16px; }
     .opt-in-label {
       display: flex;
@@ -556,11 +565,15 @@
       <div class="question-meta">Question 14 of 16</div>
       <div class="question-text">What would you expect to pay for a program that genuinely helped you quit for good?</div>
       <div class="options-group">
+        <div class="options-divider">One-time</div>
         <label class="option-label"><input type="radio" name="q14" value="Nothing — it should be free"><span>Nothing &mdash; it should be free</span></label>
-        <label class="option-label"><input type="radio" name="q14" value="$1–$50"><span>$1–$50</span></label>
-        <label class="option-label"><input type="radio" name="q14" value="$51–$100"><span>$51–$100</span></label>
-        <label class="option-label"><input type="radio" name="q14" value="$101–$200"><span>$101–$200</span></label>
-        <label class="option-label"><input type="radio" name="q14" value="$200+"><span>$200+</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="Under $50"><span>Under $50</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="$50–$150"><span>$50–$150</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="$150+"><span>$150+</span></label>
+        <div class="options-divider">Monthly subscription</div>
+        <label class="option-label"><input type="radio" name="q14" value="Under $10/month"><span>Under $10/month</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="$10–$30/month"><span>$10–$30/month</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="$30+/month"><span>$30+/month</span></label>
       </div>
     </div>
 
