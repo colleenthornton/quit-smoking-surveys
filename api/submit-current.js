@@ -25,7 +25,8 @@ module.exports = async function handler(req, res) {
     'Program Features': d.q13 || '',
     'Willingness to Pay': d.q14 || '',
     'Trust in Creator': d.q15 || '',
-    'Additional Comments': d.q16 || '',
+    'Gender': d.q16 || '',
+    'Additional Comments': d.q17 || '',
     'Email': d.email || '',
   };
 

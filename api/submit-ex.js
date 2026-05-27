@@ -26,7 +26,8 @@ module.exports = async function handler(req, res) {
     'Message at Hardest Moment': d.q14 || '',
     'Emptiness Statement': d.q15 || '',
     'Willingness to Share': d.q16 || '',
-    'Additional Comments': d.q17 || '',
+    'Gender': d.q17 || '',
+    'Additional Comments': d.q18 || '',
     'Email': d.email || '',
   };
 
