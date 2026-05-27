@@ -28,6 +28,7 @@ module.exports = async function handler(req, res) {
     'Willingness to Share': d.q16 || '',
     'Gender': d.q17 || '',
     'Additional Comments': d.q18 || '',
+    'Opt In': d.opt_in || '',
     'Email': d.email || '',
   };
 

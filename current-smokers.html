@@ -231,6 +231,30 @@
     }
     .email-field input[type="email"]:focus { border-color: #1C1C1A; }
     .email-field input[type="email"]::placeholder { color: #C5C2BB; }
+    .opt-in-field { margin-top: 16px; }
+    .opt-in-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #4A4844;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+    .opt-in-label input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: #1C1C1A;
+      cursor: pointer;
+    }
+    .email-privacy-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #ABA89F;
+      line-height: 1.6;
+    }
 
     .submit-section { margin-top: 32px; }
     .submit-btn {
@@ -581,6 +605,13 @@
         <label for="email-input">Your email address &nbsp;<span class="optional-note">Optional</span></label>
         <input type="email" name="email" id="email-input" placeholder="you@example.com" autocomplete="email">
       </div>
+      <div class="opt-in-field">
+        <label class="opt-in-label">
+          <input type="checkbox" name="opt_in" value="yes">
+          <span>Keep me posted on the program's progress</span>
+        </label>
+      </div>
+      <p class="email-privacy-note">Your email comes directly to me, Colleen — not to Vercel or any third party.</p>
     </div>
 
     <div class="submit-section">

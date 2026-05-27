@@ -27,6 +27,7 @@ module.exports = async function handler(req, res) {
     'Trust in Creator': d.q15 || '',
     'Gender': d.q16 || '',
     'Additional Comments': d.q17 || '',
+    'Opt In': d.opt_in || '',
     'Email': d.email || '',
   };
 
