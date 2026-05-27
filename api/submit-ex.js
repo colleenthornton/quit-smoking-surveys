@@ -52,7 +52,7 @@ module.exports = async function handler(req, res) {
     if (!response.ok) {
       const errText = await response.text();
       console.error('Airtable error:', errText);
-      return res.status(502).json({ error: 'Failed to save to Airtable' });
+      return res.status(502).json({ error: 'Failed to save to Airtable', detail: errText });
     }
 
     return res.status(200).json({ success: true });
